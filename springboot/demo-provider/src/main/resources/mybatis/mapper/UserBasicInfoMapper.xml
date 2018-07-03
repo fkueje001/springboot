@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.provider.dao.UserBasicInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.provider.entity.UserBasicInfo" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="recommender_phone" property="recommenderPhone" jdbcType="VARCHAR" />
+    <result column="qr_code" property="qrCode" jdbcType="VARCHAR" />
+    <result column="vallet_url" property="valletUrl" jdbcType="VARCHAR" />
+    <result column="head_image" property="headImage" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="pay_password" property="payPassword" jdbcType="VARCHAR" />
+    <result column="profit_state" property="profitState" jdbcType="TINYINT" />
+    <result column="withdraw_state" property="withdrawState" jdbcType="TINYINT" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="is_manager" property="isManager" jdbcType="TINYINT" />
+    <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.provider.entity.UserBasicInfo" extends="BaseResultMap" >
+    <result column="indirect_recommend" property="indirectRecommend" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, nick_name, phone, password, recommender_phone, qr_code, vallet_url, head_image, 
+    level, pay_password, profit_state, withdraw_state, state, is_manager, register_time, 
+    create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    indirect_recommend
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_basic_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getUserBasicInfoList" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user_basic_info
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_basic_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.provider.entity.UserBasicInfo" >
+    insert into user_basic_info (id, nick_name, phone, 
+      password, recommender_phone, qr_code, 
+      vallet_url, head_image, level, 
+      pay_password, profit_state, withdraw_state, 
+      state, is_manager, register_time, 
+      create_time, update_time, indirect_recommend
+      )
+    values (#{id,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{recommenderPhone,jdbcType=VARCHAR}, #{qrCode,jdbcType=VARCHAR}, 
+      #{valletUrl,jdbcType=VARCHAR}, #{headImage,jdbcType=VARCHAR}, #{level,jdbcType=TINYINT}, 
+      #{payPassword,jdbcType=VARCHAR}, #{profitState,jdbcType=TINYINT}, #{withdrawState,jdbcType=TINYINT}, 
+      #{state,jdbcType=TINYINT}, #{isManager,jdbcType=TINYINT}, #{registerTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{indirectRecommend,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.provider.entity.UserBasicInfo" >
+    insert into user_basic_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="recommenderPhone != null" >
+        recommender_phone,
+      </if>
+      <if test="qrCode != null" >
+        qr_code,
+      </if>
+      <if test="valletUrl != null" >
+        vallet_url,
+      </if>
+      <if test="headImage != null" >
+        head_image,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="payPassword != null" >
+        pay_password,
+      </if>
+      <if test="profitState != null" >
+        profit_state,
+      </if>
+      <if test="withdrawState != null" >
+        withdraw_state,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="isManager != null" >
+        is_manager,
+      </if>
+      <if test="registerTime != null" >
+        register_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="indirectRecommend != null" >
+        indirect_recommend,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="recommenderPhone != null" >
+        #{recommenderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="qrCode != null" >
+        #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="valletUrl != null" >
+        #{valletUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null" >
+        #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="payPassword != null" >
+        #{payPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="profitState != null" >
+        #{profitState,jdbcType=TINYINT},
+      </if>
+      <if test="withdrawState != null" >
+        #{withdrawState,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="isManager != null" >
+        #{isManager,jdbcType=TINYINT},
+      </if>
+      <if test="registerTime != null" >
+        #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="indirectRecommend != null" >
+        #{indirectRecommend,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.provider.entity.UserBasicInfo" >
+    update user_basic_info
+    <set >
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="recommenderPhone != null" >
+        recommender_phone = #{recommenderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="qrCode != null" >
+        qr_code = #{qrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="valletUrl != null" >
+        vallet_url = #{valletUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null" >
+        head_image = #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="payPassword != null" >
+        pay_password = #{payPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="profitState != null" >
+        profit_state = #{profitState,jdbcType=TINYINT},
+      </if>
+      <if test="withdrawState != null" >
+        withdraw_state = #{withdrawState,jdbcType=TINYINT},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="isManager != null" >
+        is_manager = #{isManager,jdbcType=TINYINT},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="indirectRecommend != null" >
+        indirect_recommend = #{indirectRecommend,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.provider.entity.UserBasicInfo" >
+    update user_basic_info
+    set nick_name = #{nickName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      recommender_phone = #{recommenderPhone,jdbcType=VARCHAR},
+      qr_code = #{qrCode,jdbcType=VARCHAR},
+      vallet_url = #{valletUrl,jdbcType=VARCHAR},
+      head_image = #{headImage,jdbcType=VARCHAR},
+      level = #{level,jdbcType=TINYINT},
+      pay_password = #{payPassword,jdbcType=VARCHAR},
+      profit_state = #{profitState,jdbcType=TINYINT},
+      withdraw_state = #{withdrawState,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT},
+      is_manager = #{isManager,jdbcType=TINYINT},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      indirect_recommend = #{indirectRecommend,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.provider.entity.UserBasicInfo" >
+    update user_basic_info
+    set nick_name = #{nickName,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      recommender_phone = #{recommenderPhone,jdbcType=VARCHAR},
+      qr_code = #{qrCode,jdbcType=VARCHAR},
+      vallet_url = #{valletUrl,jdbcType=VARCHAR},
+      head_image = #{headImage,jdbcType=VARCHAR},
+      level = #{level,jdbcType=TINYINT},
+      pay_password = #{payPassword,jdbcType=VARCHAR},
+      profit_state = #{profitState,jdbcType=TINYINT},
+      withdraw_state = #{withdrawState,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT},
+      is_manager = #{isManager,jdbcType=TINYINT},
+      register_time = #{registerTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

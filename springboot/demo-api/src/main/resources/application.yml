@@ -1,0 +1,54 @@
+server:
+    tomcat:
+        uri-encoding: UTF-8
+        max-threads: 1000
+        min-spare-threads: 30
+    port: 8082
+
+spring:
+    cache:
+          type: redis
+    redis:
+       host: localhost # server host
+       port: 6379 # connection port
+       pool.max-idle: 8 # pool settings ...
+       pool.min-idle: 1
+       pool.max-active: 8
+       pool.max-wait: -1
+       database: 0
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.jdbc.Driver
+        druid:
+            url: jdbc:mysql://120.79.230.183:3306/jd_meijia_test?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+            username: root
+            password: 1@bg74yK[Q)!hzfWuZ+fIpUvk;Ps8e~0pxw
+            initial-size: 10
+            max-active: 100
+            min-idle: 10
+            max-wait: 60000
+            pool-prepared-statements: true
+            max-pool-prepared-statement-per-connection-size: 20
+            time-between-eviction-runs-millis: 60000
+            min-evictable-idle-time-millis: 300000
+            validation-query: SELECT 1 FROM DUAL
+            test-while-idle: true
+            test-on-borrow: false
+            test-on-return: false
+            stat-view-servlet:
+                enabled: true
+                url-pattern: /druid/*
+                #login-username: admin
+                #login-password: admin
+            filter:
+                stat:
+                    log-slow-sql: true
+                    slow-sql-millis: 1000
+                    merge-sql: true
+                wall:
+                    config:
+                        multi-statement-allow: true
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.example.provider.dao
