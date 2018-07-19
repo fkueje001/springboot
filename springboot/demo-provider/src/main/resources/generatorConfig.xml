@@ -15,7 +15,7 @@
                         connectionURL="jdbc:mysql://120.79.230.183:3306/jd_meijia_test"
                         userId="root" password="1@bg74yK[Q)!hzfWuZ+fIpUvk;Ps8e~0pxw"/>
 
-        <javaModelGenerator targetPackage="com.example.provider.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.example.server.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -24,7 +24,7 @@
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.example.provider.dao" targetProject="src/main/java" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.example.server.dao" targetProject="src/main/java" type="XMLMAPPER">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
